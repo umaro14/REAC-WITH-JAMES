@@ -1,7 +1,7 @@
 
 export function Tabs(props){
 
-    const { todos } = props;
+    const { todos, selectedTab, setSelectedTab } = props; //coming from App so todos can be accessed here
 
     const tabs = ['All', 'Open', 'Completed']
 
@@ -17,7 +17,12 @@ export function Tabs(props){
                                    todos.filter(val => val.complete).length      //Count tasks that are complete.
 
                 return(
-                    <button key={tabIndex} className="tab-button">
+                    <button onClick={() =>{
+                        setSelectedTab(tab);
+                    }}
+                    key={tabIndex} 
+                    className={"tab-button " + 
+                    (tab === selectedTab ? ' tab-selected' : '')} >
                         <h4>
                             {tab} <span>({numOfTasks})</span>
                         </h4>
@@ -25,7 +30,7 @@ export function Tabs(props){
                 )
             } )
         }
-          
+        <hr />
         </nav>
     )
 }

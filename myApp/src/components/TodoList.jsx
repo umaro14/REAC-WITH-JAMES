@@ -2,24 +2,24 @@ import { TodoCard } from "./TodoCard";
 
 export function TodoList(props){
 
-  const { todos } = props;
+  const { todos, selectedTab, } = props;  //coming from App so todos can be accessed here
 
 
-    const tab = 'Completed';
-    const filteredTodos = tab === "All" ?
-    todos :                                  //if tab === all then filteredTODOS = todos
-    tab === "Completed" ?                    //if tab === completed then filteredTODOS = completed todos
-    todos.filter(val => val.complete) :
-    todos.filter(val => !val.complete);      //if tab === !completed which is fale then filteredTODOS = uncompleted todos
+    const filteredTodos = selectedTab === "All" ?
+    todos :                                  // if selectedTab === all then filteredTODOS = todos
+    selectedTab === "Completed" ?            // if selectedTab === completed then filteredTODOS = completed todos
+    todos.filter(val => val.complete) :      
+    todos.filter(val => !val.complete);      // if selectedTab === !completed which is false then filteredTODOS = uncompleted todos
 
     return (
         <>
           {
-            todos.map((todo, todoIndex) => {
+            filteredTodos.map((todo, todoIndex) => {
               return(
                 <TodoCard 
                 key={todoIndex} 
-                todoIndex={todoIndex} 
+                todoIndex={todos.findIndex(val =>val.input == todo.input)}
+                {...props} //whatevr the props of the todoListpass willbe passed wown to the props here
                 todo={todo} />
               )
             })

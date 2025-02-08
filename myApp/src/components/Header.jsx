@@ -2,7 +2,7 @@
 export function Header(props){
 
     //destructuring 
-    const { todos } = props;
+    const { todos } = props;             //coming from App so todos can be accessed here
     const todoslength = todos.length;
 
     const isTaskPlural = todos.length != 1;
